@@ -37,8 +37,6 @@ class Server {
         server.use(proxyPath, proxy(this._options.server.proxy[proxyPath]))
       }
     }
-    console.log('isDebug:', isDebug)
-    
 
     server.get('*', (req, res) => {
       res.sendFile(this._options.indexPath ? this._options.indexPath : path.join(this._options.staticDir, 'index.html'))
