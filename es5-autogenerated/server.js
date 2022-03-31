@@ -70,7 +70,6 @@ var Server = function () {
           }
         }
       }
-      console.log('isDebug:', isDebug);
 
       server.get('*', function (req, res) {
         res.sendFile(_this._options.indexPath ? _this._options.indexPath : path.join(_this._options.staticDir, 'index.html'));
