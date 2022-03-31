@@ -1,5 +1,5 @@
 {
-  "name": "@prerenderer/renderer-puppeteer",
+  "name": "@waitkafuka/renderer-puppeteer",
   "version": "0.2.0",
   "description": "A renderer for @prerenderer/prerenderer that uses puppeteer to prerender pages.",
   "license": "MIT",
@@ -22,23 +22,8 @@
     "google-chrome",
     "headless-chrome"
   ],
-  "author": {
-    "name": "Joshua Bemenderfer",
-    "email": "tribex10@gmail.com",
-    "url": "https://joshderf.com/"
-  },
-  "contributors": [
-    {
-      "name": "Joshua Bemenderfer",
-      "email": "tribex10@gmail.com",
-      "url": "https://joshderf.com/"
-    }
-  ],
-  "repository": "Tribex/prerenderer",
-  "bugs": {
-    "url": "https://github.com/Tribex/prerenderer/issues",
-    "email": "tribex10@gmail.com"
-  },
+  
+  "repository": "waitkafuka/prerenderer",
   "dependencies": {
     "promise-limit": "^2.5.0",
     "puppeteer": "^2.0.0"

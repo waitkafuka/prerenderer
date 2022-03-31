@@ -24,6 +24,15 @@ var Server = function () {
       var _this = this;
 
       var server = this._expressServer;
+      var isDebug = this._options.debug;
+
+      if (this._options.server && this._options.server.before) {
+        this._options.server.before(server);
+      }
+
+      if (isDebug) {
+        server.use(require('morgan')('combined'));
+      }
 
       this._prerenderer.modifyServer(this, 'pre-static');
 
@@ -61,6 +70,7 @@ var Server = function () {
           }
         }
       }
+      console.log('isDebug:', isDebug);
 
       server.get('*', function (req, res) {
         res.sendFile(_this._options.indexPath ? _this._options.indexPath : path.join(_this._options.staticDir, 'index.html'));
@@ -69,6 +79,7 @@ var Server = function () {
       this._prerenderer.modifyServer(this, 'post-fallback');
 
       return new Promise(function (resolve, reject) {
+        console.log('监听端口为：', _this._options.server.port);
         _this._nativeServer = server.listen(_this._options.server.port, function () {
           resolve();
         });

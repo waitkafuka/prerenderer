@@ -12,9 +12,14 @@ class Server {
 
   initialize () {
     const server = this._expressServer
+    const isDebug = this._options.debug
 
     if (this._options.server && this._options.server.before) {
       this._options.server.before(server)
+    }
+
+    if (isDebug) {
+      server.use(require('morgan')('combined'))
     }
 
     this._prerenderer.modifyServer(this, 'pre-static')
@@ -32,6 +37,8 @@ class Server {
         server.use(proxyPath, proxy(this._options.server.proxy[proxyPath]))
       }
     }
+    console.log('isDebug:', isDebug)
+    
 
     server.get('*', (req, res) => {
       res.sendFile(this._options.indexPath ? this._options.indexPath : path.join(this._options.staticDir, 'index.html'))
@@ -40,6 +47,7 @@ class Server {
     this._prerenderer.modifyServer(this, 'post-fallback')
 
     return new Promise((resolve, reject) => {
+      console.log('监听端口为：', this._options.server.port)
       this._nativeServer = server.listen(this._options.server.port, () => {
         resolve()
       })
